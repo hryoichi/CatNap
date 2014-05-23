@@ -472,6 +472,7 @@
 				47F3173F192ED15A002620F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		47F31740192ED15A002620F4 /* Build configuration list for PBXNativeTarget "CatNapTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +481,7 @@
 				47F31742192ED15A002620F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
