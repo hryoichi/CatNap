@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		47F31708192ED15A002620F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31707192ED15A002620F4 /* Foundation.framework */; };
+		47F3170A192ED15A002620F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31709192ED15A002620F4 /* CoreGraphics.framework */; };
+		47F3170C192ED15A002620F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F3170B192ED15A002620F4 /* UIKit.framework */; };
+		47F3170E192ED15A002620F4 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F3170D192ED15A002620F4 /* SpriteKit.framework */; };
+		47F31714192ED15A002620F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47F31712192ED15A002620F4 /* InfoPlist.strings */; };
+		47F31716192ED15A002620F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F31715192ED15A002620F4 /* main.m */; };
+		47F3171A192ED15A002620F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F31719192ED15A002620F4 /* AppDelegate.m */; };
+		47F3171D192ED15A002620F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F3171B192ED15A002620F4 /* Main.storyboard */; };
+		47F31720192ED15A002620F4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F3171F192ED15A002620F4 /* ViewController.m */; };
+		47F31723192ED15A002620F4 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F31722192ED15A002620F4 /* MyScene.m */; };
+		47F31725192ED15A002620F4 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 47F31724192ED15A002620F4 /* Spaceship.png */; };
+		47F31727192ED15A002620F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F31726192ED15A002620F4 /* Images.xcassets */; };
+		47F3172E192ED15A002620F4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F3172D192ED15A002620F4 /* XCTest.framework */; };
+		47F3172F192ED15A002620F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31707192ED15A002620F4 /* Foundation.framework */; };
+		47F31730192ED15A002620F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F3170B192ED15A002620F4 /* UIKit.framework */; };
+		47F31738192ED15A002620F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47F31736192ED15A002620F4 /* InfoPlist.strings */; };
+		47F3173A192ED15A002620F4 /* CatNapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F31739192ED15A002620F4 /* CatNapTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47F31731192ED15A002620F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47F316FC192ED15A002620F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47F31703192ED15A002620F4;
+			remoteInfo = CatNap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		47F31704192ED15A002620F4 /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47F31707192ED15A002620F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		47F31709192ED15A002620F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		47F3170B192ED15A002620F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		47F3170D192ED15A002620F4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		47F31711192ED15A002620F4 /* CatNap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatNap-Info.plist"; sourceTree = "<group>"; };
+		47F31713192ED15A002620F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		47F31715192ED15A002620F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		47F31717192ED15A002620F4 /* CatNap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CatNap-Prefix.pch"; sourceTree = "<group>"; };
+		47F31718192ED15A002620F4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		47F31719192ED15A002620F4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		47F3171C192ED15A002620F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		47F3171E192ED15A002620F4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		47F3171F192ED15A002620F4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		47F31721192ED15A002620F4 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
+		47F31722192ED15A002620F4 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
+		47F31724192ED15A002620F4 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		47F31726192ED15A002620F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		47F3172C192ED15A002620F4 /* CatNapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatNapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47F3172D192ED15A002620F4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		47F31735192ED15A002620F4 /* CatNapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatNapTests-Info.plist"; sourceTree = "<group>"; };
+		47F31737192ED15A002620F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		47F31739192ED15A002620F4 /* CatNapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatNapTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		47F31701192ED15A002620F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F3170A192ED15A002620F4 /* CoreGraphics.framework in Frameworks */,
+				47F3170C192ED15A002620F4 /* UIKit.framework in Frameworks */,
+				47F3170E192ED15A002620F4 /* SpriteKit.framework in Frameworks */,
+				47F31708192ED15A002620F4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47F31729192ED15A002620F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F3172E192ED15A002620F4 /* XCTest.framework in Frameworks */,
+				47F31730192ED15A002620F4 /* UIKit.framework in Frameworks */,
+				47F3172F192ED15A002620F4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47F316FB192ED15A002620F4 = {
+			isa = PBXGroup;
+			children = (
+				47F3170F192ED15A002620F4 /* CatNap */,
+				47F31733192ED15A002620F4 /* CatNapTests */,
+				47F31706192ED15A002620F4 /* Frameworks */,
+				47F31705192ED15A002620F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		47F31705192ED15A002620F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47F31704192ED15A002620F4 /* CatNap.app */,
+				47F3172C192ED15A002620F4 /* CatNapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47F31706192ED15A002620F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47F31707192ED15A002620F4 /* Foundation.framework */,
+				47F31709192ED15A002620F4 /* CoreGraphics.framework */,
+				47F3170B192ED15A002620F4 /* UIKit.framework */,
+				47F3170D192ED15A002620F4 /* SpriteKit.framework */,
+				47F3172D192ED15A002620F4 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		47F3170F192ED15A002620F4 /* CatNap */ = {
+			isa = PBXGroup;
+			children = (
+				47F31718192ED15A002620F4 /* AppDelegate.h */,
+				47F31719192ED15A002620F4 /* AppDelegate.m */,
+				47F3171B192ED15A002620F4 /* Main.storyboard */,
+				47F3171E192ED15A002620F4 /* ViewController.h */,
+				47F3171F192ED15A002620F4 /* ViewController.m */,
+				47F31721192ED15A002620F4 /* MyScene.h */,
+				47F31722192ED15A002620F4 /* MyScene.m */,
+				47F31724192ED15A002620F4 /* Spaceship.png */,
+				47F31726192ED15A002620F4 /* Images.xcassets */,
+				47F31710192ED15A002620F4 /* Supporting Files */,
+			);
+			path = CatNap;
+			sourceTree = "<group>";
+		};
+		47F31710192ED15A002620F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47F31711192ED15A002620F4 /* CatNap-Info.plist */,
+				47F31712192ED15A002620F4 /* InfoPlist.strings */,
+				47F31715192ED15A002620F4 /* main.m */,
+				47F31717192ED15A002620F4 /* CatNap-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		47F31733192ED15A002620F4 /* CatNapTests */ = {
+			isa = PBXGroup;
+			children = (
+				47F31739192ED15A002620F4 /* CatNapTests.m */,
+				47F31734192ED15A002620F4 /* Supporting Files */,
+			);
+			path = CatNapTests;
+			sourceTree = "<group>";
+		};
+		47F31734192ED15A002620F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47F31735192ED15A002620F4 /* CatNapTests-Info.plist */,
+				47F31736192ED15A002620F4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		47F31703192ED15A002620F4 /* CatNap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47F3173D192ED15A002620F4 /* Build configuration list for PBXNativeTarget "CatNap" */;
+			buildPhases = (
+				47F31700192ED15A002620F4 /* Sources */,
+				47F31701192ED15A002620F4 /* Frameworks */,
+				47F31702192ED15A002620F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CatNap;
+			productName = CatNap;
+			productReference = 47F31704192ED15A002620F4 /* CatNap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		47F3172B192ED15A002620F4 /* CatNapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47F31740192ED15A002620F4 /* Build configuration list for PBXNativeTarget "CatNapTests" */;
+			buildPhases = (
+				47F31728192ED15A002620F4 /* Sources */,
+				47F31729192ED15A002620F4 /* Frameworks */,
+				47F3172A192ED15A002620F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47F31732192ED15A002620F4 /* PBXTargetDependency */,
+			);
+			name = CatNapTests;
+			productName = CatNapTests;
+			productReference = 47F3172C192ED15A002620F4 /* CatNapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		47F316FC192ED15A002620F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Ryoichi Hara";
+				TargetAttributes = {
+					47F3172B192ED15A002620F4 = {
+						TestTargetID = 47F31703192ED15A002620F4;
+					};
+				};
+			};
+			buildConfigurationList = 47F316FF192ED15A002620F4 /* Build configuration list for PBXProject "CatNap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 47F316FB192ED15A002620F4;
+			productRefGroup = 47F31705192ED15A002620F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				47F31703192ED15A002620F4 /* CatNap */,
+				47F3172B192ED15A002620F4 /* CatNapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47F31702192ED15A002620F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F31714192ED15A002620F4 /* InfoPlist.strings in Resources */,
+				47F31727192ED15A002620F4 /* Images.xcassets in Resources */,
+				47F31725192ED15A002620F4 /* Spaceship.png in Resources */,
+				47F3171D192ED15A002620F4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47F3172A192ED15A002620F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F31738192ED15A002620F4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		47F31700192ED15A002620F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F31723192ED15A002620F4 /* MyScene.m in Sources */,
+				47F31720192ED15A002620F4 /* ViewController.m in Sources */,
+				47F3171A192ED15A002620F4 /* AppDelegate.m in Sources */,
+				47F31716192ED15A002620F4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47F31728192ED15A002620F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47F3173A192ED15A002620F4 /* CatNapTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47F31732192ED15A002620F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47F31703192ED15A002620F4 /* CatNap */;
+			targetProxy = 47F31731192ED15A002620F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		47F31712192ED15A002620F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47F31713192ED15A002620F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		47F3171B192ED15A002620F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47F3171C192ED15A002620F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		47F31736192ED15A002620F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47F31737192ED15A002620F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		47F3173B192ED15A002620F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		47F3173C192ED15A002620F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		47F3173E192ED15A002620F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CatNap/CatNap-Prefix.pch";
+				INFOPLIST_FILE = "CatNap/CatNap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		47F3173F192ED15A002620F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CatNap/CatNap-Prefix.pch";
+				INFOPLIST_FILE = "CatNap/CatNap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		47F31741192ED15A002620F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CatNap.app/CatNap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CatNap/CatNap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CatNapTests/CatNapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		47F31742192ED15A002620F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CatNap.app/CatNap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CatNap/CatNap-Prefix.pch";
+				INFOPLIST_FILE = "CatNapTests/CatNapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		47F316FF192ED15A002620F4 /* Build configuration list for PBXProject "CatNap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47F3173B192ED15A002620F4 /* Debug */,
+				47F3173C192ED15A002620F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47F3173D192ED15A002620F4 /* Build configuration list for PBXNativeTarget "CatNap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47F3173E192ED15A002620F4 /* Debug */,
+				47F3173F192ED15A002620F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		47F31740192ED15A002620F4 /* Build configuration list for PBXNativeTarget "CatNapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47F31741192ED15A002620F4 /* Debug */,
+				47F31742192ED15A002620F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 47F316FC192ED15A002620F4 /* Project object */;
+}
