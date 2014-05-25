@@ -8,46 +8,52 @@
 
 #import "MyScene.h"
 
+@interface MyScene ()
+
+@property (nonatomic, strong) SKNode *gameNode;
+@property (nonatomic, strong) SKSpriteNode *catNode;
+@property (nonatomic, strong) SKSpriteNode *bedNode;
+@property (nonatomic, assign) NSInteger currentLevel;
+
+@end
+
 @implementation MyScene
 
--(id)initWithSize:(CGSize)size {    
-    if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
-        
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
-        myLabel.text = @"Hello, World!";
-        myLabel.fontSize = 30;
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
-        
-        [self addChild:myLabel];
+#pragma mark - Lifecycle
+
+- (instancetype)initWithSize:(CGSize)size {
+    self = [super initWithSize:size];
+
+    if (self) {
+        [self p_initialzeScene];
     }
+
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
-    }
+- (void)update:(CFTimeInterval)currentTime {
 }
 
--(void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
+#pragma mark - Private
+
+- (void)p_initialzeScene {
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+
+    SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"background"];
+    bg.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+    [self addChild:bg];
+
+    [self p_addCatBed];
+}
+
+- (void)p_addCatBed {
+    _bedNode = [SKSpriteNode spriteNodeWithImageNamed:@"cat_bed"];
+    _bedNode.position = CGPointMake(270.0f, 15.0f);
+    [self addChild:_bedNode];
+
+    CGSize contactSize = CGSizeMake(40.0f, 30.0f);
+    _bedNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
+    _bedNode.physicsBody.dynamic = NO; // Make the body static
 }
 
 @end
