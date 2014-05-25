@@ -45,6 +45,21 @@
     [self addChild:bg];
 
     [self p_addCatBed];
+
+    _gameNode = [SKNode node];
+    [self addChild:_gameNode];
+
+    _currentLevel = 1;
+    [self p_setupLevel:_currentLevel];
+}
+
+- (void)p_setupLevel:(NSInteger)level {
+    // Load the plist file
+    NSString *fileName = [NSString stringWithFormat:@"level%i", level];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+    NSDictionary *levelParams = [NSDictionary dictionaryWithContentsOfFile:filePath];
+
+    [self p_addCatAtPosition:CGPointFromString(levelParams[@"catPosition"])];
 }
 
 - (void)p_addCatBed {
@@ -57,6 +72,18 @@
     _bedNode.physicsBody.dynamic = NO; // Make the body static
 
     [_bedNode attachDebugRectWithSize:contactSize];
+}
+
+- (void)p_addCatAtPosition:(CGPoint)position {
+    // Add the cat in the level on its starting position
+    _catNode = [SKSpriteNode spriteNodeWithImageNamed:@"cat_sleepy"];
+    _catNode.position = position;
+
+    [_gameNode addChild:_catNode];
+
+    CGSize contactSize = CGSizeMake(_catNode.size.width - 40.0f, _catNode.size.height - 10.0f);
+    _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
+    [_catNode attachDebugRectWithSize:contactSize];
 }
 
 @end
