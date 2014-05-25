@@ -7,6 +7,7 @@
 //
 
 #import "MyScene.h"
+#import "SKSpriteNode+DebugDraw.h"
 
 @interface MyScene ()
 
@@ -54,6 +55,8 @@
     CGSize contactSize = CGSizeMake(40.0f, 30.0f);
     _bedNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     _bedNode.physicsBody.dynamic = NO; // Make the body static
+
+    [_bedNode attachDebugRectWithSize:contactSize];
 }
 
 @end
