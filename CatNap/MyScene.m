@@ -60,6 +60,7 @@
     NSDictionary *levelParams = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
     [self p_addCatAtPosition:CGPointFromString(levelParams[@"catPosition"])];
+    [self p_addBlocksFromArray:levelParams[@"blocks"]];
 }
 
 - (void)p_addCatBed {
@@ -84,6 +85,30 @@
     CGSize contactSize = CGSizeMake(_catNode.size.width - 40.0f, _catNode.size.height - 10.0f);
     _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     [_catNode attachDebugRectWithSize:contactSize];
+}
+
+- (void)p_addBlocksFromArray:(NSArray *)blocks {
+    for (id block in blocks) {
+        if ([block isKindOfClass:[NSDictionary class]]) {
+            SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
+            [_gameNode addChild:blockSprite];
+        }
+    }
+}
+
+- (SKSpriteNode *)p_addBlockWithRect:(CGRect)blockRect {
+    NSString *textureName = [NSString
+        stringWithFormat:@"%.fx%.f.png", CGRectGetWidth(blockRect), CGRectGetHeight(blockRect)];
+
+    SKSpriteNode *blockSprite = [SKSpriteNode spriteNodeWithImageNamed:textureName];
+    blockSprite.position = blockRect.origin;
+
+    CGRect bodyRect = CGRectInset(blockRect, 2.0f, 2.0f);
+    blockSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bodyRect.size];
+
+    [blockSprite attachDebugRectWithSize:blockRect.size];
+
+    return blockSprite;
 }
 
 @end
