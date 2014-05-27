@@ -8,6 +8,7 @@
 
 #import "MyScene.h"
 #import "SKSpriteNode+DebugDraw.h"
+#import "SKTAudio.h"
 
 @interface MyScene ()
 
@@ -61,6 +62,8 @@
 
     [self p_addCatAtPosition:CGPointFromString(levelParams[@"catPosition"])];
     [self p_addBlocksFromArray:levelParams[@"blocks"]];
+
+    [[SKTAudio sharedInstance] playBackgroundMusic:@"bgMusic.mp3"];
 }
 
 - (void)p_addCatBed {
