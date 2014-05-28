@@ -42,6 +42,24 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 - (void)update:(CFTimeInterval)currentTime {
 }
 
+#pragma mark - Actions
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+
+    [self.physicsWorld enumerateBodiesAtPoint:location usingBlock:^(SKPhysicsBody *body, BOOL *stop) {
+        if (body.categoryBitMask == CNPhysicsCategoryBlock) {
+            [body.node removeFromParent];
+            *stop = YES;
+
+            [self runAction:[SKAction playSoundFileNamed:@"pop.mp3" waitForCompletion:NO]];
+        }
+    }];
+}
+
 #pragma mark - Private
 
 - (void)p_initialzeScene {
