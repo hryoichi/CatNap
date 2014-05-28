@@ -14,9 +14,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CNPhysicsCategoryCat   = 1 << 0,  // 0001 = 1
     CNPhysicsCategoryBlock = 1 << 1,  // 0010 = 2
     CNPhysicsCategoryBed   = 1 << 2,  // 0100 = 4
+    CNPhysicsCategoryEdge  = 1 << 3,  // 1000 = 8
 };
 
-@interface MyScene ()
+@interface MyScene () <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong) SKNode *gameNode;
 @property (nonatomic, strong) SKSpriteNode *catNode;
@@ -64,6 +65,8 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
 - (void)p_initialzeScene {
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    self.physicsWorld.contactDelegate = self;
+    self.physicsBody.categoryBitMask = CNPhysicsCategoryEdge;
 
     SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"background"];
     bg.position = CGPointMake(self.size.width / 2, self.size.height / 2);
@@ -114,6 +117,9 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     _catNode.physicsBody.categoryBitMask = CNPhysicsCategoryCat;
 
+    // "contactTestBitMask": A mask that defines which categories of bodies cause intersection notifications with this physics body.
+    _catNode.physicsBody.contactTestBitMask = CNPhysicsCategoryBed | CNPhysicsCategoryEdge;
+
     [_catNode attachDebugRectWithSize:contactSize];
 }
 
@@ -122,7 +128,8 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
         if ([block isKindOfClass:[NSDictionary class]]) {
             SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
             blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
-            blockSprite.physicsBody.collisionBitMask = CNPhysicsCategoryBlock | CNPhysicsCategoryCat;
+            blockSprite.physicsBody.collisionBitMask =
+                CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
             [_gameNode addChild:blockSprite];
         }
     }
@@ -141,6 +148,20 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [blockSprite attachDebugRectWithSize:blockRect.size];
 
     return blockSprite;
+}
+
+#pragma mark - SKPhysicsContactDelegate
+
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    NSUInteger collision = (contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask);
+
+    if (collision == (CNPhysicsCategoryCat | CNPhysicsCategoryBed)) {
+        NSLog(@"SUCCESS");
+    }
+
+    if (collision == (CNPhysicsCategoryCat | CNPhysicsCategoryEdge)) {
+        NSLog(@"FAIL");
+    }
 }
 
 @end
