@@ -10,6 +10,12 @@
 #import "SKSpriteNode+DebugDraw.h"
 #import "SKTAudio.h"
 
+typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
+    CNPhysicsCategoryCat   = 1 << 0,  // 0001 = 1
+    CNPhysicsCategoryBlock = 1 << 1,  // 0010 = 2
+    CNPhysicsCategoryBed   = 1 << 2,  // 0100 = 4
+};
+
 @interface MyScene ()
 
 @property (nonatomic, strong) SKNode *gameNode;
@@ -74,6 +80,7 @@
     CGSize contactSize = CGSizeMake(40.0f, 30.0f);
     _bedNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     _bedNode.physicsBody.dynamic = NO; // Make the body static
+    _bedNode.physicsBody.categoryBitMask = CNPhysicsCategoryBed;
 
     [_bedNode attachDebugRectWithSize:contactSize];
 }
@@ -87,6 +94,8 @@
 
     CGSize contactSize = CGSizeMake(_catNode.size.width - 40.0f, _catNode.size.height - 10.0f);
     _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
+    _catNode.physicsBody.categoryBitMask = CNPhysicsCategoryCat;
+
     [_catNode attachDebugRectWithSize:contactSize];
 }
 
@@ -94,6 +103,8 @@
     for (id block in blocks) {
         if ([block isKindOfClass:[NSDictionary class]]) {
             SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
+            blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+            blockSprite.physicsBody.collisionBitMask = CNPhysicsCategoryBlock | CNPhysicsCategoryCat;
             [_gameNode addChild:blockSprite];
         }
     }
