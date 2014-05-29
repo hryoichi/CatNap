@@ -11,10 +11,11 @@
 #import "SKTAudio.h"
 
 typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
-    CNPhysicsCategoryCat   = 1 << 0,  // 0001 = 1
-    CNPhysicsCategoryBlock = 1 << 1,  // 0010 = 2
-    CNPhysicsCategoryBed   = 1 << 2,  // 0100 = 4
-    CNPhysicsCategoryEdge  = 1 << 3,  // 1000 = 8
+    CNPhysicsCategoryCat   = 1 << 0,  // 00001 = 1
+    CNPhysicsCategoryBlock = 1 << 1,  // 00010 = 2
+    CNPhysicsCategoryBed   = 1 << 2,  // 00100 = 4
+    CNPhysicsCategoryEdge  = 1 << 3,  // 01000 = 8
+    CNPhysicsCategoryLabel = 1 << 4,  // 10000 = 16
 };
 
 @interface MyScene () <SKPhysicsContactDelegate>
@@ -61,7 +62,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     }];
 }
 
-#pragma mark - Private
+#pragma mark - Private (Initialization)
 
 - (void)p_initialzeScene {
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -116,6 +117,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CGSize contactSize = CGSizeMake(_catNode.size.width - 40.0f, _catNode.size.height - 10.0f);
     _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     _catNode.physicsBody.categoryBitMask = CNPhysicsCategoryCat;
+    _catNode.physicsBody.collisionBitMask = CNPhysicsCategoryBlock | CNPhysicsCategoryEdge;
 
     // "contactTestBitMask": A mask that defines which categories of bodies cause intersection notifications with this physics body.
     _catNode.physicsBody.contactTestBitMask = CNPhysicsCategoryBed | CNPhysicsCategoryEdge;
@@ -150,17 +152,85 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     return blockSprite;
 }
 
+#pragma mark - Private
+
+- (void)p_inGameMessage:(NSString *)text {
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-Regular"];
+    label.text = text;
+    label.fontSize = 64.0f;
+    label.color = [SKColor whiteColor];
+    label.position = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) - 10.0f);
+    label.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:10.0f];
+    label.physicsBody.collisionBitMask = CNPhysicsCategoryEdge;
+    label.physicsBody.categoryBitMask = CNPhysicsCategoryLabel;
+    label.physicsBody.restitution = 0.7f;
+
+    [self.gameNode addChild:label];
+
+    [label runAction:[SKAction sequence:@[[SKAction waitForDuration:3.0], [SKAction removeFromParent]]]];
+}
+
+- (void)p_newGame {
+    [self.gameNode removeAllChildren];
+    [self p_setupLevel:self.currentLevel];
+    [self p_inGameMessage:[NSString stringWithFormat:@"Level %i", self.currentLevel]];
+}
+
+- (void)p_lose {
+    // Disable further contact detection
+    self.catNode.physicsBody.contactTestBitMask = 0;
+    self.catNode.texture = [SKTexture textureWithImageNamed:@"cat_awake"];
+
+    [[SKTAudio sharedInstance] pauseBackgroundMusic];
+    [self runAction:[SKAction playSoundFileNamed:@"lose.mp3" waitForCompletion:NO]];
+
+    [self p_inGameMessage:@"Try again ..."];
+
+    [self runAction:[SKAction sequence:@[
+        [SKAction waitForDuration:5.0],
+        [SKAction performSelector:@selector(p_newGame) onTarget:self]
+    ]]];
+}
+
+- (void)p_win {
+    self.catNode.physicsBody = nil;
+
+    CGFloat curlY = self.bedNode.position.y + self.catNode.size.height / 2;
+    CGPoint curlPoint = CGPointMake(self.bedNode.position.x, curlY);
+
+    [self.catNode runAction:[SKAction group:@[
+        [SKAction moveTo:curlPoint duration:0.66],
+        [SKAction rotateToAngle:0.0f duration:0.5]
+    ]]];
+
+    [self p_inGameMessage:@"Good job!"];
+
+    [self runAction:[SKAction sequence:@[
+        [SKAction waitForDuration:5.0],
+        [SKAction performSelector:@selector(p_newGame) onTarget:self]
+    ]]];
+
+    [self.catNode runAction:[SKAction animateWithTextures:@[
+        [SKTexture textureWithImageNamed:@"cat_curlup1"],
+        [SKTexture textureWithImageNamed:@"cat_curlup2"],
+        [SKTexture textureWithImageNamed:@"cat_curlup3"]
+    ] timePerFrame:0.25]];
+
+    [[SKTAudio sharedInstance] pauseBackgroundMusic];
+    [self runAction:[SKAction playSoundFileNamed:@"win.mp3" waitForCompletion:NO]];
+}
+
 #pragma mark - SKPhysicsContactDelegate
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
     NSUInteger collision = (contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask);
 
     if (collision == (CNPhysicsCategoryCat | CNPhysicsCategoryBed)) {
-        NSLog(@"SUCCESS");
+        [self p_win];
     }
 
     if (collision == (CNPhysicsCategoryCat | CNPhysicsCategoryEdge)) {
-        NSLog(@"FAIL");
+        [self p_lose];
     }
 }
 
