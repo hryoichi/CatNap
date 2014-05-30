@@ -85,7 +85,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 1;
+    _currentLevel = 2;
     [self p_setupLevel:_currentLevel];
 }
 
