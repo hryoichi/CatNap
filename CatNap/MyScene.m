@@ -9,6 +9,7 @@
 #import "MyScene.h"
 #import "SKSpriteNode+DebugDraw.h"
 #import "SKTAudio.h"
+#import "SKTUtils.h"
 
 typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CNPhysicsCategoryCat   = 1 << 0,  // 00001 = 1
@@ -42,6 +43,12 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)update:(CFTimeInterval)currentTime {
+}
+
+- (void)didSimulatePhysics {
+    if (self.catNode.physicsBody.contactTestBitMask && fabs(self.catNode.zRotation) > DegreesToRadians(25)) {
+        [self p_lose];
+    }
 }
 
 #pragma mark - Actions
