@@ -12,11 +12,12 @@
 #import "SKTUtils.h"
 
 typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
-    CNPhysicsCategoryCat   = 1 << 0,  // 00001 = 1
-    CNPhysicsCategoryBlock = 1 << 1,  // 00010 = 2
-    CNPhysicsCategoryBed   = 1 << 2,  // 00100 = 4
-    CNPhysicsCategoryEdge  = 1 << 3,  // 01000 = 8
-    CNPhysicsCategoryLabel = 1 << 4,  // 10000 = 16
+    CNPhysicsCategoryCat    = 1 << 0,  // 000001 = 1
+    CNPhysicsCategoryBlock  = 1 << 1,  // 000010 = 2
+    CNPhysicsCategoryBed    = 1 << 2,  // 000100 = 4
+    CNPhysicsCategoryEdge   = 1 << 3,  // 001000 = 8
+    CNPhysicsCategoryLabel  = 1 << 4,  // 010000 = 16
+    CNPhysicsCategorySpring = 1 << 5,  // 100000 = 32
 };
 
 @interface MyScene () <SKPhysicsContactDelegate>
@@ -66,6 +67,19 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
             [self runAction:[SKAction playSoundFileNamed:@"pop.mp3" waitForCompletion:NO]];
         }
+
+        if (body.categoryBitMask == CNPhysicsCategorySpring) {
+            SKSpriteNode *spring = (SKSpriteNode *)body.node;
+
+            [body applyImpulse:CGVectorMake(0.0f, 12.0f)
+                       atPoint:CGPointMake(spring.size.width / 2, spring.size.height / 2)];
+            [body.node runAction:[SKAction sequence:@[
+                [SKAction waitForDuration:1.0],
+                [SKAction removeFromParent]
+            ]]];
+
+            *stop = YES;
+        }
     }];
 }
 
@@ -97,6 +111,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     [self p_addCatAtPosition:CGPointFromString(levelParams[@"catPosition"])];
     [self p_addBlocksFromArray:levelParams[@"blocks"]];
+    [self p_addSpringsFromArray:levelParams[@"springs"]];
 
     [[SKTAudio sharedInstance] playBackgroundMusic:@"bgMusic.mp3"];
 }
@@ -124,7 +139,8 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CGSize contactSize = CGSizeMake(_catNode.size.width - 40.0f, _catNode.size.height - 10.0f);
     _catNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:contactSize];
     _catNode.physicsBody.categoryBitMask = CNPhysicsCategoryCat;
-    _catNode.physicsBody.collisionBitMask = CNPhysicsCategoryBlock | CNPhysicsCategoryEdge;
+    _catNode.physicsBody.collisionBitMask =
+        CNPhysicsCategoryBlock | CNPhysicsCategoryEdge | CNPhysicsCategorySpring;
 
     // "contactTestBitMask": A mask that defines which categories of bodies cause intersection notifications with this physics body.
     _catNode.physicsBody.contactTestBitMask = CNPhysicsCategoryBed | CNPhysicsCategoryEdge;
@@ -157,6 +173,23 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [blockSprite attachDebugRectWithSize:blockRect.size];
 
     return blockSprite;
+}
+
+- (void)p_addSpringsFromArray:(NSArray *)springs {
+    for (id spring in springs) {
+        if ([spring isKindOfClass:[NSDictionary class]]) {
+            SKSpriteNode *springSprite = [SKSpriteNode spriteNodeWithImageNamed:@"spring"];
+            springSprite.position = CGPointFromString(spring[@"position"]);
+            springSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:springSprite.size];
+            springSprite.physicsBody.categoryBitMask = CNPhysicsCategorySpring;
+            springSprite.physicsBody.collisionBitMask =
+                CNPhysicsCategoryEdge | CNPhysicsCategoryBlock | CNPhysicsCategoryCat;
+
+            [springSprite attachDebugRectWithSize:springSprite.size];
+
+            [_gameNode addChild:springSprite];
+        }
+    }
 }
 
 #pragma mark - Private
