@@ -163,11 +163,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     label.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:10.0f];
     label.physicsBody.collisionBitMask = CNPhysicsCategoryEdge;
     label.physicsBody.categoryBitMask = CNPhysicsCategoryLabel;
+    label.physicsBody.contactTestBitMask = CNPhysicsCategoryEdge;
     label.physicsBody.restitution = 0.7f;
 
     [self.gameNode addChild:label];
-
-    [label runAction:[SKAction sequence:@[[SKAction waitForDuration:3.0], [SKAction removeFromParent]]]];
 }
 
 - (void)p_newGame {
@@ -231,6 +230,31 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     if (collision == (CNPhysicsCategoryCat | CNPhysicsCategoryEdge)) {
         [self p_lose];
+    }
+
+    if (collision == (CNPhysicsCategoryLabel | CNPhysicsCategoryEdge)) {
+        SKLabelNode *label;
+
+        if (contact.bodyA.categoryBitMask == CNPhysicsCategoryLabel) {
+            label = (SKLabelNode *)contact.bodyA.node;
+        }
+        else {
+            label = (SKLabelNode *)contact.bodyB.node;
+        }
+
+        if (!label.userData) {
+            label.userData = [@{@"bounceCount": @0} mutableCopy];
+        }
+
+        NSInteger newBounceCount = [label.userData[@"bounceCount"] integerValue] + 1;
+        NSLog(@"bounce: %i", newBounceCount);
+
+        if (newBounceCount < 4) {
+            label.userData = [@{@"bounceCount": @(newBounceCount)} mutableCopy];
+        }
+        else {
+            [label removeFromParent];
+        }
     }
 }
 
