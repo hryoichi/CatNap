@@ -12,12 +12,13 @@
 #import "SKTUtils.h"
 
 typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
-    CNPhysicsCategoryCat    = 1 << 0,  // 000001 = 1
-    CNPhysicsCategoryBlock  = 1 << 1,  // 000010 = 2
-    CNPhysicsCategoryBed    = 1 << 2,  // 000100 = 4
-    CNPhysicsCategoryEdge   = 1 << 3,  // 001000 = 8
-    CNPhysicsCategoryLabel  = 1 << 4,  // 010000 = 16
-    CNPhysicsCategorySpring = 1 << 5,  // 100000 = 32
+    CNPhysicsCategoryCat    = 1 << 0,  // 0000001 = 1
+    CNPhysicsCategoryBlock  = 1 << 1,  // 0000010 = 2
+    CNPhysicsCategoryBed    = 1 << 2,  // 0000100 = 4
+    CNPhysicsCategoryEdge   = 1 << 3,  // 0001000 = 8
+    CNPhysicsCategoryLabel  = 1 << 4,  // 0010000 = 16
+    CNPhysicsCategorySpring = 1 << 5,  // 0100000 = 32
+    CNPhysicsCategoryHook   = 1 << 6,  // 1000000 = 64
 };
 
 @interface MyScene () <SKPhysicsContactDelegate>
@@ -220,6 +221,26 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     SKPhysicsJointFixed *ceilingFix = [SKPhysicsJointFixed
         jointWithBodyA:_hookBaseNode.physicsBody bodyB:self.physicsBody anchor:CGPointZero];
     [self.physicsWorld addJoint:ceilingFix];
+
+    _hookNode = [SKSpriteNode spriteNodeWithImageNamed:@"hook"];
+    _hookNode.position = CGPointMake(hookPosition.x, hookPosition.y - 63.0f);
+    _hookNode.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(_hookNode.size.width / 2)];
+    _hookNode.physicsBody.categoryBitMask = CNPhysicsCategoryHook;
+    _hookNode.physicsBody.contactTestBitMask = CNPhysicsCategoryCat;
+    _hookNode.physicsBody.collisionBitMask = kNilOptions;
+
+    [_gameNode addChild:_hookNode];
+
+    CGPoint anchorB = CGPointMake(
+        _hookNode.position.x,
+        _hookNode.position.y + (_hookNode.size.height / 2)
+    );
+    SKPhysicsJointSpring *ropeJoint =
+    [SKPhysicsJointSpring jointWithBodyA:_hookBaseNode.physicsBody
+                                   bodyB:_hookNode.physicsBody
+                                 anchorA:_hookBaseNode.position
+                                 anchorB:anchorB];
+    [self.physicsWorld addJoint:ropeJoint];
 }
 
 #pragma mark - Private
