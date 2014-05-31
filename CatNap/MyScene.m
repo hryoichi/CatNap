@@ -56,7 +56,8 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CGFloat angle = CGPointToAngle(CGPointSubtract(_hookBaseNode.position, _hookNode.position));
     self.ropeNode.zRotation = M_PI + angle;
 
-    if (self.catNode.physicsBody.contactTestBitMask && fabs(self.catNode.zRotation) > DegreesToRadians(25)) {
+    if (!self.isHooked && self.catNode.physicsBody.contactTestBitMask &&
+        fabs(self.catNode.zRotation) > DegreesToRadians(25)) {
         [self p_lose];
     }
 }
@@ -88,6 +89,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
             ]]];
 
             *stop = YES;
+        }
+
+        if (body.categoryBitMask == CNPhysicsCategoryCat && self.isHooked) {
+            [self p_releaseHook];
         }
     }];
 }
@@ -322,6 +327,13 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [self runAction:[SKAction playSoundFileNamed:@"win.mp3" waitForCompletion:NO]];
 }
 
+- (void)p_releaseHook {
+    self.catNode.zRotation = 0.0f;
+
+    [self.physicsWorld removeJoint:[self.hookNode.physicsBody.joints lastObject]];
+    self.hooked = NO;
+}
+
 #pragma mark - SKPhysicsContactDelegate
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
@@ -358,6 +370,21 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
         else {
             [label removeFromParent];
         }
+    }
+
+    if (collision == (CNPhysicsCategoryHook | CNPhysicsCategoryCat)) {
+        self.catNode.physicsBody.velocity = CGVectorMake(0.0f, 0.0f);
+        self.catNode.physicsBody.angularVelocity = 0.0f;
+
+        CGPoint anchor = CGPointMake(
+            self.hookNode.position.x,
+            self.hookNode.position.y + (self.hookNode.size.height / 2)
+        );
+        SKPhysicsJointFixed *hookJoint = [SKPhysicsJointFixed
+            jointWithBodyA:self.hookNode.physicsBody bodyB:self.catNode.physicsBody anchor:anchor];
+        [self.physicsWorld addJoint:hookJoint];
+
+        self.hooked = YES;
     }
 }
 
