@@ -26,6 +26,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 @property (nonatomic, strong) SKSpriteNode *catNode;
 @property (nonatomic, strong) SKSpriteNode *bedNode;
 @property (nonatomic, assign) NSInteger currentLevel;
+@property (nonatomic, assign, getter = isHooked) BOOL hooked;
+@property (nonatomic, strong) SKSpriteNode *hookBaseNode;
+@property (nonatomic, strong) SKSpriteNode *hookNode;
+@property (nonatomic, strong) SKSpriteNode *ropeNode;
 
 @end
 
@@ -113,6 +117,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [self p_addBlocksFromArray:levelParams[@"blocks"]];
     [self p_addSpringsFromArray:levelParams[@"springs"]];
 
+    if (levelParams[@"hookPosition"]) {
+        [self p_addHookAtPosition:CGPointFromString(levelParams[@"hookPosition"])];
+    }
+
     [[SKTAudio sharedInstance] playBackgroundMusic:@"bgMusic.mp3"];
 }
 
@@ -190,6 +198,28 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
             [_gameNode addChild:springSprite];
         }
     }
+}
+
+- (void)p_addHookAtPosition:(CGPoint)hookPosition {
+    // Cleans up the instance variables and makes sure there is a hook object found in the .plist data.
+    _hookBaseNode = nil;
+    _hookNode = nil;
+    _ropeNode = nil;
+
+    _hooked = NO;
+
+    _hookBaseNode = [SKSpriteNode spriteNodeWithImageNamed:@"hook_base"];
+    _hookBaseNode.position = CGPointMake(
+        hookPosition.x,
+        hookPosition.y - (_hookBaseNode.size.height / 2)
+    );
+    _hookBaseNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_hookBaseNode.size];
+
+    [_gameNode addChild:_hookBaseNode];
+
+    SKPhysicsJointFixed *ceilingFix = [SKPhysicsJointFixed
+        jointWithBodyA:_hookBaseNode.physicsBody bodyB:self.physicsBody anchor:CGPointZero];
+    [self.physicsWorld addJoint:ceilingFix];
 }
 
 #pragma mark - Private
