@@ -52,6 +52,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)didSimulatePhysics {
+    // Calculate the angle between the ceiling fixture and the hook
+    CGFloat angle = CGPointToAngle(CGPointSubtract(_hookBaseNode.position, _hookNode.position));
+    self.ropeNode.zRotation = M_PI + angle;
+
     if (self.catNode.physicsBody.contactTestBitMask && fabs(self.catNode.zRotation) > DegreesToRadians(25)) {
         [self p_lose];
     }
@@ -221,6 +225,14 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     SKPhysicsJointFixed *ceilingFix = [SKPhysicsJointFixed
         jointWithBodyA:_hookBaseNode.physicsBody bodyB:self.physicsBody anchor:CGPointZero];
     [self.physicsWorld addJoint:ceilingFix];
+
+    _ropeNode = [SKSpriteNode spriteNodeWithImageNamed:@"rope"];
+    _ropeNode.position = _hookBaseNode.position;
+
+    // Make the sprite swing like a pendulum
+    _ropeNode.anchorPoint = CGPointMake(0.0f, 0.5f);
+
+    [_gameNode addChild:_ropeNode];
 
     _hookNode = [SKSpriteNode spriteNodeWithImageNamed:@"hook"];
     _hookNode.position = CGPointMake(hookPosition.x, hookPosition.y - 63.0f);
