@@ -120,7 +120,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 3;
+    _currentLevel = 1;
     [self p_setupLevel:_currentLevel];
 }
 
@@ -315,6 +315,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)p_lose {
+    if (self.currentLevel > 1) {
+        self.currentLevel--;
+    }
+
     // Disable further contact detection
     self.catNode.physicsBody.contactTestBitMask = 0;
     self.catNode.texture = [SKTexture textureWithImageNamed:@"cat_awake"];
@@ -331,6 +335,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)p_win {
+    if (self.currentLevel) {
+        self.currentLevel++;
+    }
+
     self.catNode.physicsBody = nil;
 
     CGFloat curlY = self.bedNode.position.y + self.catNode.size.height / 2;
