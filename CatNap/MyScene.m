@@ -72,6 +72,13 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     [self.physicsWorld enumerateBodiesAtPoint:location usingBlock:^(SKPhysicsBody *body, BOOL *stop) {
         if (body.categoryBitMask == CNPhysicsCategoryBlock) {
+
+            for (SKPhysicsJoint *joint in body.joints) {
+                [self.physicsWorld removeJoint:joint];
+                [joint.bodyA.node removeFromParent];
+                [joint.bodyB.node removeFromParent];
+            }
+
             [body.node removeFromParent];
             *stop = YES;
 
@@ -113,7 +120,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 2;
+    _currentLevel = 3;
     [self p_setupLevel:_currentLevel];
 }
 
@@ -168,12 +175,36 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
 - (void)p_addBlocksFromArray:(NSArray *)blocks {
     for (id block in blocks) {
+
         if ([block isKindOfClass:[NSDictionary class]]) {
-            SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
-            blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
-            blockSprite.physicsBody.collisionBitMask =
-                CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
-            [_gameNode addChild:blockSprite];
+
+            if (block[@"tuple"]) {
+                CGRect rect1 = CGRectFromString([block[@"tuple"] firstObject]);
+                SKSpriteNode *block1 = [self p_addBlockWithRect:rect1];
+                block1.physicsBody.friction = 0.8f;
+                block1.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                block1.physicsBody.collisionBitMask =
+                    CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+                [_gameNode addChild:block1];
+
+                CGRect rect2 = CGRectFromString([block[@"tuple"] lastObject]);
+                SKSpriteNode *block2 = [self p_addBlockWithRect:rect2];
+                block2.physicsBody.friction = 0.8f;
+                block2.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                block2.physicsBody.collisionBitMask =
+                    CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+                [_gameNode addChild:block2];
+
+                [self.physicsWorld addJoint:[SKPhysicsJointFixed
+                    jointWithBodyA:block1.physicsBody bodyB:block2.physicsBody anchor:CGPointZero]];
+            }
+            else {
+                SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
+                blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                blockSprite.physicsBody.collisionBitMask =
+                    CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+                [_gameNode addChild:blockSprite];
+            }
         }
     }
 }
