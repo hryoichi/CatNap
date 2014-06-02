@@ -138,6 +138,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
         [self p_addHookAtPosition:CGPointFromString(levelParams[@"hookPosition"])];
     }
 
+    if (levelParams[@"seesawPosition"]) {
+        [self p_addSeesawAtPosition:CGPointFromString(levelParams[@"seesawPosition"])];
+    }
+
     [[SKTAudio sharedInstance] playBackgroundMusic:@"bgMusic.mp3"];
 }
 
@@ -291,6 +295,32 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [self.physicsWorld addJoint:ropeJoint];
 }
 
+- (void)p_addSeesawAtPosition:(CGPoint)position {
+    SKSpriteNode *seesawFix = [SKSpriteNode spriteNodeWithImageNamed:@"45x45"];
+    seesawFix.position = position;
+    seesawFix.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:seesawFix.size];
+    seesawFix.physicsBody.categoryBitMask = kNilOptions;
+    seesawFix.physicsBody.collisionBitMask = kNilOptions;
+
+    [_gameNode addChild:seesawFix];
+
+    SKPhysicsJointFixed *fixJoint = [SKPhysicsJointFixed
+        jointWithBodyA:seesawFix.physicsBody bodyB:self.physicsBody anchor:CGPointZero];
+    [self.physicsWorld addJoint:fixJoint];
+
+    SKSpriteNode *seesaw = [SKSpriteNode spriteNodeWithImageNamed:@"430x30"];
+    seesaw.position = position;
+    seesaw.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:seesaw.size];
+    seesaw.physicsBody.collisionBitMask = CNPhysicsCategoryCat | CNPhysicsCategoryBlock;
+    [seesaw attachDebugRectWithSize:seesaw.size];
+
+    [_gameNode addChild:seesaw];
+
+    SKPhysicsJointPin *pin = [SKPhysicsJointPin
+        jointWithBodyA:seesawFix.physicsBody bodyB:seesaw.physicsBody anchor:position];
+    [self.physicsWorld addJoint:pin];
+}
+
 #pragma mark - Private
 
 - (void)p_inGameMessage:(NSString *)text {
@@ -335,7 +365,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)p_win {
-    if (self.currentLevel) {
+    if (self.currentLevel < 4) {
         self.currentLevel++;
     }
 
