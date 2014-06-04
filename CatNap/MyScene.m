@@ -122,6 +122,8 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     _currentLevel = 1;
     [self p_setupLevel:_currentLevel];
+
+    [self p_createPhotoFrameWithPosition:CGPointMake(120.0f, 220.0f)];
 }
 
 - (void)p_setupLevel:(NSInteger)level {
@@ -401,6 +403,19 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     [self.physicsWorld removeJoint:[self.hookNode.physicsBody.joints lastObject]];
     self.hooked = NO;
+}
+
+- (void)p_createPhotoFrameWithPosition:(CGPoint)position {
+    SKSpriteNode *photoFrame = [SKSpriteNode spriteNodeWithImageNamed:@"picture-frame"];
+    photoFrame.name = @"PhotoFrameNode";
+    photoFrame.position = position;
+
+    SKSpriteNode *pictureNode = [SKSpriteNode spriteNodeWithImageNamed:@"picture"];
+    pictureNode.name =  @"PictureNode";
+    pictureNode.position = position;
+
+    [_gameNode addChild:pictureNode];
+    [_gameNode addChild:photoFrame];
 }
 
 #pragma mark - SKPhysicsContactDelegate
