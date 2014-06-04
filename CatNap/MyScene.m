@@ -412,9 +412,16 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     SKSpriteNode *pictureNode = [SKSpriteNode spriteNodeWithImageNamed:@"picture"];
     pictureNode.name =  @"PictureNode";
-    pictureNode.position = position;
 
-    [_gameNode addChild:pictureNode];
+    SKSpriteNode *maskNode = [SKSpriteNode spriteNodeWithImageNamed:@"picture-frame-mask"];
+    maskNode.name = @"Mask";
+
+    SKCropNode *cropNode = [SKCropNode node];
+    [cropNode addChild:pictureNode];
+    [cropNode setMaskNode:maskNode];
+
+    [photoFrame addChild:cropNode];
+
     [_gameNode addChild:photoFrame];
 }
 
