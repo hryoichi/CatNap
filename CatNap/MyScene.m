@@ -126,7 +126,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
 - (void)p_setupLevel:(NSInteger)level {
     // Load the plist file
-    NSString *fileName = [NSString stringWithFormat:@"level%i", level];
+    NSString *fileName = [NSString stringWithFormat:@"level%li", (long)level];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
     NSDictionary *levelParams = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
@@ -341,7 +341,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 - (void)p_newGame {
     [self.gameNode removeAllChildren];
     [self p_setupLevel:self.currentLevel];
-    [self p_inGameMessage:[NSString stringWithFormat:@"Level %i", self.currentLevel]];
+    [self p_inGameMessage:[NSString stringWithFormat:@"Level %li", (long)self.currentLevel]];
 }
 
 - (void)p_lose {
@@ -431,7 +431,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
         }
 
         NSInteger newBounceCount = [label.userData[@"bounceCount"] integerValue] + 1;
-        NSLog(@"bounce: %i", newBounceCount);
+        NSLog(@"bounce: %li", (long)newBounceCount);
 
         if (newBounceCount < 4) {
             label.userData = [@{@"bounceCount": @(newBounceCount)} mutableCopy];
