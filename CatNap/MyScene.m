@@ -71,6 +71,13 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CGPoint location = [touch locationInNode:self];
 
     [self.physicsWorld enumerateBodiesAtPoint:location usingBlock:^(SKPhysicsBody *body, BOOL *stop) {
+        if ([body.node.name isEqualToString:@"PhotoFrameNode"]) {
+            NSLog(@"Picture tapped!");
+            *stop = YES;
+
+            return;
+        }
+
         if (body.categoryBitMask == CNPhysicsCategoryBlock) {
 
             for (SKPhysicsJoint *joint in body.joints) {
@@ -423,6 +430,13 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     [photoFrame addChild:cropNode];
 
     [_gameNode addChild:photoFrame];
+
+    photoFrame.physicsBody = [SKPhysicsBody
+        bodyWithCircleOfRadius:photoFrame.size.width / 2.0f - photoFrame.size.width * 0.025f];
+    photoFrame.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+    photoFrame.physicsBody.collisionBitMask =
+        CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+
 }
 
 #pragma mark - SKPhysicsContactDelegate
