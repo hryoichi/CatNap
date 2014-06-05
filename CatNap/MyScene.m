@@ -72,7 +72,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
     [self.physicsWorld enumerateBodiesAtPoint:location usingBlock:^(SKPhysicsBody *body, BOOL *stop) {
         if ([body.node.name isEqualToString:@"PhotoFrameNode"]) {
-            NSLog(@"Picture tapped!");
+
+            if ([self.delegate respondsToSelector:@selector(requestImagePickcer)]) {
+                [self.delegate requestImagePickcer];
+            }
             *stop = YES;
 
             return;
@@ -109,6 +112,13 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
             [self p_releaseHook];
         }
     }];
+}
+
+#pragma mark - Public
+
+- (void)setPhotoTexture:(SKTexture *)texture {
+    SKSpriteNode *picture = (SKSpriteNode *)[self childNodeWithName:@"//PictureNode"];
+    [picture setTexture:texture];
 }
 
 #pragma mark - Private (Initialization)
