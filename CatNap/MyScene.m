@@ -132,6 +132,18 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     bg.position = CGPointMake(self.size.width / 2, self.size.height / 2);
     [self addChild:bg];
 
+    SKSpriteNode *bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"background-desat"];
+
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Zapfino"];
+    label.text = @"Cat Nap";
+    label.fontSize = 96.0f;
+
+    SKCropNode *cropNode = [SKCropNode node];
+    [cropNode addChild:bg2];
+    [cropNode setMaskNode:label];
+    cropNode.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+    [self addChild:cropNode];
+
     [self p_addCatBed];
 
     _gameNode = [SKNode node];
