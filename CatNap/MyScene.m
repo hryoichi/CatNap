@@ -137,10 +137,10 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 1;
+    _currentLevel = 5;
     [self p_setupLevel:_currentLevel];
 
-    [self p_createPhotoFrameWithPosition:CGPointMake(120.0f, 220.0f)];
+    // [self p_createPhotoFrameWithPosition:CGPointMake(120.0f, 220.0f)];
 }
 
 - (void)p_setupLevel:(NSInteger)level {
@@ -200,33 +200,43 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     for (id block in blocks) {
 
         if ([block isKindOfClass:[NSDictionary class]]) {
+            NSString *blockType = block[@"type"];
 
-            if (block[@"tuple"]) {
-                CGRect rect1 = CGRectFromString([block[@"tuple"] firstObject]);
-                SKSpriteNode *block1 = [self p_addBlockWithRect:rect1];
-                block1.physicsBody.friction = 0.8f;
-                block1.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
-                block1.physicsBody.collisionBitMask =
+            if (!blockType) {
+
+                if (block[@"tuple"]) {
+                    CGRect rect1 = CGRectFromString([block[@"tuple"] firstObject]);
+                    SKSpriteNode *block1 = [self p_addBlockWithRect:rect1];
+                    block1.physicsBody.friction = 0.8f;
+                    block1.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                    block1.physicsBody.collisionBitMask =
                     CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
-                [_gameNode addChild:block1];
+                    [_gameNode addChild:block1];
 
-                CGRect rect2 = CGRectFromString([block[@"tuple"] lastObject]);
-                SKSpriteNode *block2 = [self p_addBlockWithRect:rect2];
-                block2.physicsBody.friction = 0.8f;
-                block2.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
-                block2.physicsBody.collisionBitMask =
+                    CGRect rect2 = CGRectFromString([block[@"tuple"] lastObject]);
+                    SKSpriteNode *block2 = [self p_addBlockWithRect:rect2];
+                    block2.physicsBody.friction = 0.8f;
+                    block2.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                    block2.physicsBody.collisionBitMask =
                     CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
-                [_gameNode addChild:block2];
+                    [_gameNode addChild:block2];
 
-                [self.physicsWorld addJoint:[SKPhysicsJointFixed
-                    jointWithBodyA:block1.physicsBody bodyB:block2.physicsBody anchor:CGPointZero]];
+                    [self.physicsWorld addJoint:[SKPhysicsJointFixed
+                                                 jointWithBodyA:block1.physicsBody bodyB:block2.physicsBody anchor:CGPointZero]];
+                }
+                else {
+                    SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
+                    blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+                    blockSprite.physicsBody.collisionBitMask =
+                    CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+                    [_gameNode addChild:blockSprite];
+                }
             }
             else {
-                SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
-                blockSprite.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
-                blockSprite.physicsBody.collisionBitMask =
-                    CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
-                [_gameNode addChild:blockSprite];
+
+                if ([blockType isEqualToString:@"PhotoFrameBlock"]) {
+                    [self p_createPhotoFrameWithPosition:CGPointFromString(block[@"point"])];
+                }
             }
         }
     }
@@ -384,7 +394,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)p_win {
-    if (self.currentLevel < 4) {
+    if (self.currentLevel < 5) {
         self.currentLevel++;
     }
 
