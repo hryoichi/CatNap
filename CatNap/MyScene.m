@@ -34,7 +34,7 @@
     self = [super initWithSize:size];
 
     if (self) {
-        [self p_initialzeScene];
+        [self p_initializeScene];
     }
 
     return self;
@@ -115,7 +115,7 @@
 
 #pragma mark - Private (Initialization)
 
-- (void)p_initialzeScene {
+- (void)p_initializeScene {
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsWorld.contactDelegate = self;
     self.physicsBody.categoryBitMask = CNPhysicsCategoryEdge;
