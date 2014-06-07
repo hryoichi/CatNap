@@ -7,6 +7,7 @@
 //
 
 #import "OldTVNode.h"
+#import "Physics.h"
 @import AVFoundation;
 
 @interface OldTVNode ()
@@ -45,6 +46,13 @@
         self.size = frame.size;
 
         _player.volume = 0.0f;
+
+        CGRect bodyRect = CGRectInset(frame, 2.0f, 2.0f);
+        self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bodyRect.size];
+        self.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+        self.physicsBody.collisionBitMask =
+            CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+
         [_videoNode play];
     }
 

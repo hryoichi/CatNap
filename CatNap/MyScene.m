@@ -11,16 +11,7 @@
 #import "SKTAudio.h"
 #import "SKTUtils.h"
 #import "OldTVNode.h"
-
-typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
-    CNPhysicsCategoryCat    = 1 << 0,  // 0000001 = 1
-    CNPhysicsCategoryBlock  = 1 << 1,  // 0000010 = 2
-    CNPhysicsCategoryBed    = 1 << 2,  // 0000100 = 4
-    CNPhysicsCategoryEdge   = 1 << 3,  // 0001000 = 8
-    CNPhysicsCategoryLabel  = 1 << 4,  // 0010000 = 16
-    CNPhysicsCategorySpring = 1 << 5,  // 0100000 = 32
-    CNPhysicsCategoryHook   = 1 << 6,  // 1000000 = 64
-};
+#import "Physics.h"
 
 @interface MyScene () <SKPhysicsContactDelegate>
 
@@ -150,12 +141,11 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 5;
+    _currentLevel = 6;
     [self p_setupLevel:_currentLevel];
 
-    OldTVNode *tvNode = [[OldTVNode alloc]
-        initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
-    [self addChild:tvNode];
+    //OldTVNode *tvNode = [[OldTVNode alloc] initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
+    //[self addChild:tvNode];
 }
 
 - (void)p_setupLevel:(NSInteger)level {
@@ -237,7 +227,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
                     [_gameNode addChild:block2];
 
                     [self.physicsWorld addJoint:[SKPhysicsJointFixed
-                                                 jointWithBodyA:block1.physicsBody bodyB:block2.physicsBody anchor:CGPointZero]];
+                        jointWithBodyA:block1.physicsBody bodyB:block2.physicsBody anchor:CGPointZero]];
                 }
                 else {
                     SKSpriteNode *blockSprite = [self p_addBlockWithRect:CGRectFromString(block[@"rect"])];
@@ -251,6 +241,9 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 
                 if ([blockType isEqualToString:@"PhotoFrameBlock"]) {
                     [self p_createPhotoFrameWithPosition:CGPointFromString(block[@"point"])];
+                }
+                else if ([blockType isEqualToString:@"TVBlock"]) {
+                    [_gameNode addChild:[[OldTVNode alloc] initWithRect:CGRectFromString(block[@"rect"])]];
                 }
             }
         }
@@ -409,7 +402,7 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
 }
 
 - (void)p_win {
-    if (self.currentLevel < 5) {
+    if (self.currentLevel < 6) {
         self.currentLevel++;
     }
 
