@@ -32,7 +32,7 @@
         cropNode.maskNode = tvMaskNode;
 
         NSURL *fileURL = [NSURL fileURLWithPath:
-            [[NSBundle mainBundle] pathForResource:@"BookTrailer" ofType:@"m4v"]];
+            [[NSBundle mainBundle] pathForResource:@"loop" ofType:@"mov"]];
         _player = [AVPlayer playerWithURL:fileURL];
 
         _videoNode = [[SKVideoNode alloc] initWithAVPlayer:_player];
@@ -47,6 +47,12 @@
 
         _player.volume = 0.0f;
 
+        _player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+
+        [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            [_player seekToTime:kCMTimeZero];
+        }];
+
         CGRect bodyRect = CGRectInset(frame, 2.0f, 2.0f);
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bodyRect.size];
         self.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
@@ -57,6 +63,10 @@
     }
 
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
 @end

@@ -154,7 +154,7 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 7;
+    _currentLevel = 6;
     [self p_setupLevel:_currentLevel];
 
     //OldTVNode *tvNode = [[OldTVNode alloc] initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
