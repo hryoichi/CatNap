@@ -10,4 +10,6 @@
 
 @interface OldTVNode : SKSpriteNode
 
+- (instancetype)initWithRect:(CGRect)frame;
+
 @end

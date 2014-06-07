@@ -10,6 +10,7 @@
 #import "SKSpriteNode+DebugDraw.h"
 #import "SKTAudio.h"
 #import "SKTUtils.h"
+#import "OldTVNode.h"
 
 typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     CNPhysicsCategoryCat    = 1 << 0,  // 0000001 = 1
@@ -152,7 +153,9 @@ typedef NS_OPTIONS(NSUInteger, CNPhysicsCategory) {
     _currentLevel = 5;
     [self p_setupLevel:_currentLevel];
 
-    // [self p_createPhotoFrameWithPosition:CGPointMake(120.0f, 220.0f)];
+    OldTVNode *tvNode = [[OldTVNode alloc]
+        initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
+    [self addChild:tvNode];
 }
 
 - (void)p_setupLevel:(NSInteger)level {
