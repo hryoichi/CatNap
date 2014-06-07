@@ -97,6 +97,7 @@
 		475519B719341C240038468B /* SKTUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SKTUtils.mm; sourceTree = "<group>"; };
 		47EA549419432B5A001B0C14 /* OldTVNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTVNode.h; sourceTree = "<group>"; };
 		47EA549519432B5A001B0C14 /* OldTVNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTVNode.m; sourceTree = "<group>"; };
+		47EA54971943340F001B0C14 /* Physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		47F31704192ED15A002620F4 /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F31707192ED15A002620F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47F31709192ED15A002620F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -278,6 +279,7 @@
 				47EA549519432B5A001B0C14 /* OldTVNode.m */,
 				473FE7EB19323A9E0009624F /* SKSpriteNode+DebugDraw.h */,
 				473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */,
+				47EA54971943340F001B0C14 /* Physics.h */,
 				47F31724192ED15A002620F4 /* Spaceship.png */,
 				47F31726192ED15A002620F4 /* Images.xcassets */,
 				47F31710192ED15A002620F4 /* Supporting Files */,
