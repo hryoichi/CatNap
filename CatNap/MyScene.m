@@ -26,6 +26,19 @@
 
 @end
 
+SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
+    // the Maximum height and widht of deviation (15% of width or height)
+    CGFloat width = inputSize.width * 0.15f;
+    CGFloat height = inputSize.height * 0.15f;
+
+    // Create a movement range
+    CGFloat xMove = width * RandomFloat() - width / 2.0f;
+    CGFloat yMove = height * RandomFloat() - height / 2.0f;
+
+    // Add random movement amount to the input point
+    return CGPointMake(inputPoint.x + xMove, inputPoint.y + yMove);
+}
+
 @implementation MyScene
 
 #pragma mark - Lifecycle
@@ -141,7 +154,7 @@
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 6;
+    _currentLevel = 7;
     [self p_setupLevel:_currentLevel];
 
     //OldTVNode *tvNode = [[OldTVNode alloc] initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
@@ -244,6 +257,9 @@
                 }
                 else if ([blockType isEqualToString:@"TVBlock"]) {
                     [_gameNode addChild:[[OldTVNode alloc] initWithRect:CGRectFromString(block[@"rect"])]];
+                }
+                else if ([blockType isEqualToString:@"WonkyBlock"]) {
+                    [_gameNode addChild:[self p_createWonkyBlockFromRect:CGRectFromString(block[@"rect"])]];
                 }
             }
         }
@@ -358,6 +374,61 @@
     [self.physicsWorld addJoint:pin];
 }
 
+- (SKShapeNode *)p_createWonkyBlockFromRect:(CGRect)inputRect {
+    CGPoint origin = CGPointMake(
+        CGRectGetMinX(inputRect) - CGRectGetWidth(inputRect) / 2.0f,
+        CGRectGetMinY(inputRect) - CGRectGetHeight(inputRect) / 2.0f
+    );
+
+    // l: left, r: right, t: top, b: bottom
+    CGPoint pointlb = origin;
+    CGPoint pointlt = CGPointMake(origin.x, CGRectGetMinY(inputRect) + CGRectGetHeight(inputRect));
+
+    CGPoint pointrb = CGPointMake(origin.x + CGRectGetWidth(inputRect), origin.y);
+    CGPoint pointrt = CGPointMake(
+        origin.x + CGRectGetWidth(inputRect),
+        origin.y + CGRectGetHeight(inputRect)
+    );
+
+    pointlb = adjustPoint(pointlb, inputRect.size);
+    pointlt = adjustPoint(pointlt, inputRect.size);
+    pointrb = adjustPoint(pointrb, inputRect.size);
+    pointrt = adjustPoint(pointrt, inputRect.size);
+
+    UIBezierPath *shapeNodePath = [UIBezierPath bezierPath];
+    [shapeNodePath moveToPoint:pointlb];
+    [shapeNodePath addLineToPoint:pointlt];
+    [shapeNodePath addLineToPoint:pointrt];
+    [shapeNodePath addLineToPoint:pointrb];
+
+    [shapeNodePath closePath];
+
+    SKShapeNode *wonkyBlock = [SKShapeNode node];
+    wonkyBlock.path = shapeNodePath.CGPath;
+
+    // Make a physics body that's just a little smaller than the visual representation
+    UIBezierPath *physicsBodyPath = [UIBezierPath bezierPath];
+    [physicsBodyPath moveToPoint:CGPointSubtract(pointlb, CGPointMake(-2.0f, -2.0f))];
+    [physicsBodyPath addLineToPoint:CGPointSubtract(pointlt, CGPointMake(-2.0f, 2.0f))];
+    [physicsBodyPath addLineToPoint:CGPointSubtract(pointrt, CGPointMake(2.0f, 2.0f))];
+    [physicsBodyPath addLineToPoint:CGPointSubtract(pointrb, CGPointMake(2.0f, -2.0f))];
+
+    [physicsBodyPath closePath];
+
+    // A polygon physics body must be a convex polygon
+    wonkyBlock.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:physicsBodyPath.CGPath];
+    wonkyBlock.physicsBody.categoryBitMask = CNPhysicsCategoryBlock;
+    wonkyBlock.physicsBody.collisionBitMask =
+        CNPhysicsCategoryBlock | CNPhysicsCategoryCat | CNPhysicsCategoryEdge;
+
+    wonkyBlock.lineWidth = 1.0f;
+    wonkyBlock.fillColor = [UIColor colorWithRed:0.75f green:0.75f blue:1.0f alpha:1.0f];
+    wonkyBlock.strokeColor = [UIColor colorWithRed:0.15f green:0.15f blue:0.0f alpha:1.0f];
+    wonkyBlock.glowWidth = 1.0f;
+
+    return wonkyBlock;
+}
+
 #pragma mark - Private
 
 - (void)p_inGameMessage:(NSString *)text {
@@ -402,7 +473,7 @@
 }
 
 - (void)p_win {
-    if (self.currentLevel < 6) {
+    if (self.currentLevel < 7) {
         self.currentLevel++;
     }
 
