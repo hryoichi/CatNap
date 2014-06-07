@@ -32,6 +32,7 @@
 		475519BA19341C240038468B /* SKNode+SKTExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B319341C240038468B /* SKNode+SKTExtras.m */; };
 		475519BB19341C240038468B /* SKTAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B519341C240038468B /* SKTAudio.m */; };
 		475519BC19341C240038468B /* SKTUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 475519B719341C240038468B /* SKTUtils.mm */; };
+		47EA549619432B5A001B0C14 /* OldTVNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EA549519432B5A001B0C14 /* OldTVNode.m */; };
 		47F31708192ED15A002620F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31707192ED15A002620F4 /* Foundation.framework */; };
 		47F3170A192ED15A002620F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31709192ED15A002620F4 /* CoreGraphics.framework */; };
 		47F3170C192ED15A002620F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F3170B192ED15A002620F4 /* UIKit.framework */; };
@@ -94,6 +95,8 @@
 		475519B519341C240038468B /* SKTAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTAudio.m; sourceTree = "<group>"; };
 		475519B619341C240038468B /* SKTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTUtils.h; sourceTree = "<group>"; };
 		475519B719341C240038468B /* SKTUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SKTUtils.mm; sourceTree = "<group>"; };
+		47EA549419432B5A001B0C14 /* OldTVNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTVNode.h; sourceTree = "<group>"; };
+		47EA549519432B5A001B0C14 /* OldTVNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTVNode.m; sourceTree = "<group>"; };
 		47F31704192ED15A002620F4 /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F31707192ED15A002620F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		47F31709192ED15A002620F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -271,6 +274,8 @@
 				47F3171F192ED15A002620F4 /* ViewController.m */,
 				47F31721192ED15A002620F4 /* MyScene.h */,
 				47F31722192ED15A002620F4 /* MyScene.m */,
+				47EA549419432B5A001B0C14 /* OldTVNode.h */,
+				47EA549519432B5A001B0C14 /* OldTVNode.m */,
 				473FE7EB19323A9E0009624F /* SKSpriteNode+DebugDraw.h */,
 				473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */,
 				47F31724192ED15A002620F4 /* Spaceship.png */,
@@ -434,6 +439,7 @@
 				47F31720192ED15A002620F4 /* ViewController.m in Sources */,
 				47F3171A192ED15A002620F4 /* AppDelegate.m in Sources */,
 				475519B919341C240038468B /* SKEmitterNode+SKTExtras.m in Sources */,
+				47EA549619432B5A001B0C14 /* OldTVNode.m in Sources */,
 				47F31716192ED15A002620F4 /* main.m in Sources */,
 				475519BB19341C240038468B /* SKTAudio.m in Sources */,
 			);
