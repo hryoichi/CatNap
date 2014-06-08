@@ -78,7 +78,10 @@
         SKView *view = (SKView *)self.view;
         MyScene *currentScene = (MyScene *)[view scene];
 
-        // Place core image code here
+        CIFilter *sepiaFilter = [CIFilter filterWithName:@"CISepiaTone"];
+        [sepiaFilter setValue:@(0.8) forKey:@"inputIntensity"];
+        imageTexture = [imageTexture textureByApplyingCIFilter:sepiaFilter];
+
         [currentScene setPhotoTexture:imageTexture];
     }];
 }
