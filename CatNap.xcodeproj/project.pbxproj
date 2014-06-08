@@ -32,6 +32,7 @@
 		475519BA19341C240038468B /* SKNode+SKTExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B319341C240038468B /* SKNode+SKTExtras.m */; };
 		475519BB19341C240038468B /* SKTAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B519341C240038468B /* SKTAudio.m */; };
 		475519BC19341C240038468B /* SKTUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 475519B719341C240038468B /* SKTUtils.mm */; };
+		47A4F8B91944022C00851AE4 /* OldTimeyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A4F8B81944022C00851AE4 /* OldTimeyFilter.m */; };
 		47EA549619432B5A001B0C14 /* OldTVNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EA549519432B5A001B0C14 /* OldTVNode.m */; };
 		47F31708192ED15A002620F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31707192ED15A002620F4 /* Foundation.framework */; };
 		47F3170A192ED15A002620F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F31709192ED15A002620F4 /* CoreGraphics.framework */; };
@@ -95,6 +96,8 @@
 		475519B519341C240038468B /* SKTAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTAudio.m; sourceTree = "<group>"; };
 		475519B619341C240038468B /* SKTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTUtils.h; sourceTree = "<group>"; };
 		475519B719341C240038468B /* SKTUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SKTUtils.mm; sourceTree = "<group>"; };
+		47A4F8B71944022C00851AE4 /* OldTimeyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTimeyFilter.h; sourceTree = "<group>"; };
+		47A4F8B81944022C00851AE4 /* OldTimeyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTimeyFilter.m; sourceTree = "<group>"; };
 		47EA549419432B5A001B0C14 /* OldTVNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTVNode.h; sourceTree = "<group>"; };
 		47EA549519432B5A001B0C14 /* OldTVNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTVNode.m; sourceTree = "<group>"; };
 		47EA54971943340F001B0C14 /* Physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				47F31722192ED15A002620F4 /* MyScene.m */,
 				47EA549419432B5A001B0C14 /* OldTVNode.h */,
 				47EA549519432B5A001B0C14 /* OldTVNode.m */,
+				47A4F8B71944022C00851AE4 /* OldTimeyFilter.h */,
+				47A4F8B81944022C00851AE4 /* OldTimeyFilter.m */,
 				473FE7EB19323A9E0009624F /* SKSpriteNode+DebugDraw.h */,
 				473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */,
 				47EA54971943340F001B0C14 /* Physics.h */,
@@ -434,6 +439,7 @@
 			files = (
 				473FE7DC19321F930009624F /* perlin.c in Sources */,
 				475519BA19341C240038468B /* SKNode+SKTExtras.m in Sources */,
+				47A4F8B91944022C00851AE4 /* OldTimeyFilter.m in Sources */,
 				47F31723192ED15A002620F4 /* MyScene.m in Sources */,
 				473FE7ED19323A9E0009624F /* SKSpriteNode+DebugDraw.m in Sources */,
 				475519BC19341C240038468B /* SKTUtils.mm in Sources */,
