@@ -19,6 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //NSArray *ciFilters = [CIFilter filterNamesInCategory:kCICategoryBuiltIn];
+    //for (NSString *filter in ciFilters) {
+    //    NSLog(@"filter name: %@", filter);
+    //    NSLog(@"filter %@", [[CIFilter filterWithName:filter] attributes]);
+    //}
 }
 
 - (void)viewWillLayoutSubviews {
