@@ -10,4 +10,6 @@
 
 @interface OldTimeyFilter : CIFilter
 
+@property (nonatomic, strong) CIImage *inputImage;
+
 @end

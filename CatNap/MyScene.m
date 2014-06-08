@@ -12,6 +12,7 @@
 #import "SKTUtils.h"
 #import "OldTVNode.h"
 #import "Physics.h"
+#import "OldTimeyFilter.h"
 
 @interface MyScene () <SKPhysicsContactDelegate>
 
@@ -159,6 +160,9 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
 
     //OldTVNode *tvNode = [[OldTVNode alloc] initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
     //[self addChild:tvNode];
+
+    self.filter = [[OldTimeyFilter alloc] init];
+    self.shouldEnableEffects = YES;
 }
 
 - (void)p_setupLevel:(NSInteger)level {
