@@ -18,6 +18,8 @@
 
 @property (nonatomic, assign) id <ImageCaptureDelegate> delegate;
 
+- (instancetype)initWithSize:(CGSize)size andLevelNumber:(NSInteger)currentLevel;
+
 /**
  *  Replace the texture for the existing SKSpriteNode that contains the image in the photo frame node.
  *

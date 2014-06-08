@@ -45,10 +45,14 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
 #pragma mark - Lifecycle
 
 - (instancetype)initWithSize:(CGSize)size {
+    return [self initWithSize:size andLevelNumber:1];
+}
+
+- (instancetype)initWithSize:(CGSize)size andLevelNumber:(NSInteger)currentLevel {
     self = [super initWithSize:size];
 
     if (self) {
-        [self p_initializeScene];
+        [self p_initializeSceneWithLevelNumber:currentLevel];
     }
 
     return self;
@@ -129,7 +133,7 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
 
 #pragma mark - Private (Initialization)
 
-- (void)p_initializeScene {
+- (void)p_initializeSceneWithLevelNumber:(NSInteger)levelNumber {
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsWorld.contactDelegate = self;
     self.physicsBody.categoryBitMask = CNPhysicsCategoryEdge;
@@ -155,14 +159,16 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
     _gameNode = [SKNode node];
     [self addChild:_gameNode];
 
-    _currentLevel = 5;
+    _currentLevel = levelNumber;
     [self p_setupLevel:_currentLevel];
 
     //OldTVNode *tvNode = [[OldTVNode alloc] initWithRect:CGRectMake(100.0f, 250.0f, 100.0f, 100.0f)];
     //[self addChild:tvNode];
 
-    self.filter = [[OldTimeyFilter alloc] init];
-    self.shouldEnableEffects = YES;
+    //self.filter = [[OldTimeyFilter alloc] init];
+    //self.shouldEnableEffects = YES;
+
+    [self p_inGameMessage:[NSString stringWithFormat:@"Level %li", (long)self.currentLevel]];
 }
 
 - (void)p_setupLevel:(NSInteger)level {
@@ -451,9 +457,13 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
 }
 
 - (void)p_newGame {
-    [self.gameNode removeAllChildren];
-    [self p_setupLevel:self.currentLevel];
-    [self p_inGameMessage:[NSString stringWithFormat:@"Level %li", (long)self.currentLevel]];
+    SKScene *nextLevel = [[MyScene alloc] initWithSize:self.size andLevelNumber:_currentLevel];
+    SKTransition *levelTransition = [SKTransition flipVerticalWithDuration:0.5];
+    [self.view presentScene:nextLevel transition:levelTransition];
+
+    //[self.gameNode removeAllChildren];
+    //[self p_setupLevel:self.currentLevel];
+    //[self p_inGameMessage:[NSString stringWithFormat:@"Level %li", (long)self.currentLevel]];
 }
 
 - (void)p_lose {
