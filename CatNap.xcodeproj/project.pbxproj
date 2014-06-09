@@ -27,6 +27,7 @@
 		473FE7E919321F930009624F /* BookTrailer.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 473FE7D619321F930009624F /* BookTrailer.m4v */; };
 		473FE7EA19321F930009624F /* loop.mov in Resources */ = {isa = PBXBuildFile; fileRef = 473FE7D719321F930009624F /* loop.mov */; };
 		473FE7ED19323A9E0009624F /* SKSpriteNode+DebugDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */; };
+		474F4C5F19453A17001E76A6 /* CustomTransitionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 474F4C5E19453A17001E76A6 /* CustomTransitionFilter.m */; };
 		475519B819341C240038468B /* SKAction+SKTExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519AF19341C240038468B /* SKAction+SKTExtras.m */; };
 		475519B919341C240038468B /* SKEmitterNode+SKTExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B119341C240038468B /* SKEmitterNode+SKTExtras.m */; };
 		475519BA19341C240038468B /* SKNode+SKTExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 475519B319341C240038468B /* SKNode+SKTExtras.m */; };
@@ -86,6 +87,8 @@
 		473FE7D719321F930009624F /* loop.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = loop.mov; sourceTree = "<group>"; };
 		473FE7EB19323A9E0009624F /* SKSpriteNode+DebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSpriteNode+DebugDraw.h"; sourceTree = "<group>"; };
 		473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSpriteNode+DebugDraw.m"; sourceTree = "<group>"; };
+		474F4C5D19453A17001E76A6 /* CustomTransitionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitionFilter.h; sourceTree = "<group>"; };
+		474F4C5E19453A17001E76A6 /* CustomTransitionFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitionFilter.m; sourceTree = "<group>"; };
 		475519AE19341C240038468B /* SKAction+SKTExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAction+SKTExtras.h"; sourceTree = "<group>"; };
 		475519AF19341C240038468B /* SKAction+SKTExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKAction+SKTExtras.m"; sourceTree = "<group>"; };
 		475519B019341C240038468B /* SKEmitterNode+SKTExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+SKTExtras.h"; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				47EA549519432B5A001B0C14 /* OldTVNode.m */,
 				47A4F8B71944022C00851AE4 /* OldTimeyFilter.h */,
 				47A4F8B81944022C00851AE4 /* OldTimeyFilter.m */,
+				474F4C5D19453A17001E76A6 /* CustomTransitionFilter.h */,
+				474F4C5E19453A17001E76A6 /* CustomTransitionFilter.m */,
 				473FE7EB19323A9E0009624F /* SKSpriteNode+DebugDraw.h */,
 				473FE7EC19323A9E0009624F /* SKSpriteNode+DebugDraw.m */,
 				47EA54971943340F001B0C14 /* Physics.h */,
@@ -442,6 +447,7 @@
 				47A4F8B91944022C00851AE4 /* OldTimeyFilter.m in Sources */,
 				47F31723192ED15A002620F4 /* MyScene.m in Sources */,
 				473FE7ED19323A9E0009624F /* SKSpriteNode+DebugDraw.m in Sources */,
+				474F4C5F19453A17001E76A6 /* CustomTransitionFilter.m in Sources */,
 				475519BC19341C240038468B /* SKTUtils.mm in Sources */,
 				475519B819341C240038468B /* SKAction+SKTExtras.m in Sources */,
 				47F31720192ED15A002620F4 /* ViewController.m in Sources */,
