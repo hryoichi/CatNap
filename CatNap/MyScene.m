@@ -13,6 +13,7 @@
 #import "OldTVNode.h"
 #import "Physics.h"
 #import "OldTimeyFilter.h"
+#import "CustomTransitionFilter.h"
 
 @interface MyScene () <SKPhysicsContactDelegate>
 
@@ -458,7 +459,8 @@ SKT_INLINE CGPoint adjustPoint(CGPoint inputPoint, CGSize inputSize) {
 
 - (void)p_newGame {
     SKScene *nextLevel = [[MyScene alloc] initWithSize:self.size andLevelNumber:_currentLevel];
-    SKTransition *levelTransition = [SKTransition flipVerticalWithDuration:0.5];
+    SKTransition *levelTransition = [SKTransition
+        transitionWithCIFilter:[[CustomTransitionFilter alloc] init] duration:0.5];
     [self.view presentScene:nextLevel transition:levelTransition];
 
     //[self.gameNode removeAllChildren];
